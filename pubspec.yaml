@@ -21,5 +21,7 @@ flutter:
     - assets/images/
     - assets/images/light/
     - assets/images/dark/
+    - assets/images/categories_banner/light/
+    - assets/images/categories_banner/dark/
     - assets/icons/
     - assets/fonts/

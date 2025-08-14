@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/routes/routes_name.dart';
+import 'package:news_app_task/modules/home/home_screen.dart';
 import 'package:news_app_task/modules/splash/splash_screen.dart';
 
 abstract class AppRoutes {
@@ -12,7 +13,7 @@ abstract class AppRoutes {
         );
       default:
         return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
+          builder: (context) => const HomeScreen(),
           settings: setting,
         );
     }
