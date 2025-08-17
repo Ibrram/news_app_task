@@ -93,7 +93,10 @@ class _HomeScreenState extends State<HomeScreen> {
           setState(() {
             selectedCategory = null;
           });
-          _advancedDrawerController.hideDrawer();
+          // delay to hide Advanced Drawer with the animation
+          Future.delayed(const Duration(milliseconds: 50), () {
+            _advancedDrawerController.hideDrawer();
+          });
         },
       ),
       child: Scaffold(
