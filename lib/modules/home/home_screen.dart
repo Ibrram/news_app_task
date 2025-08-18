@@ -5,6 +5,7 @@ import 'package:news_app_task/drawer/advanced_drawer.dart';
 import 'package:news_app_task/drawer/advanced_drawer_controller.dart';
 import 'package:news_app_task/modules/home/widgets/drawer_widget.dart';
 import 'package:news_app_task/modules/home/widgets/home_list_categories_widget.dart';
+import 'package:news_app_task/modules/home/widgets/home_list_news_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,6 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   String? selectedCategory;
+  String? categoryToApi;
   List<Map<String, dynamic>> categories = [
     {
       "name": "General",
@@ -119,13 +121,14 @@ class _HomeScreenState extends State<HomeScreen> {
             child: selectedCategory == null
                 ? HomeListCategoriesWidget(
                     categories: categories,
-                    onTap: (value) {
+                    onTap: (category, categoryId) {
                       setState(() {
-                        selectedCategory = value;
+                        selectedCategory = category;
+                        categoryToApi = categoryId;
                       });
                     },
                   )
-                : const Text('empty'),
+                : HomeListNewsWidget(categoryToApi: categoryToApi!),
           ),
         ),
       ),

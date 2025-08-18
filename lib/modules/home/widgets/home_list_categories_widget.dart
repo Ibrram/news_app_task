@@ -3,7 +3,7 @@ import 'package:news_app_task/modules/home/widgets/category_card_widget.dart';
 
 class HomeListCategoriesWidget extends StatelessWidget {
   final List<Map<String, dynamic>> categories;
-  final Function(String) onTap;
+  final Function(String, String) onTap;
   const HomeListCategoriesWidget({
     super.key,
     required this.categories,
@@ -33,7 +33,7 @@ class HomeListCategoriesWidget extends StatelessWidget {
             return CategoryCardWidget(
               category: current,
               align: align,
-              onTap: () => onTap(current['name']),
+              onTap: () => onTap(current['name'], current['category']),
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 16),
