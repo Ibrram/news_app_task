@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ArticleCardWidget extends StatelessWidget {
   final ArticleData artcile;
@@ -38,7 +39,7 @@ class ArticleCardWidget extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => launchArtcileUrl(artcile.url),
                     style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(16),
@@ -125,6 +126,12 @@ class ArticleCardWidget extends StatelessWidget {
       return '${(difference.inDays / 30).floor()} months ago';
     } else {
       return '${(difference.inDays / 365).floor()} years ago';
+    }
+  }
+
+  Future<void> launchArtcileUrl(String url) async {
+    if (!await launchUrl(Uri.parse(url))) {
+      throw Exception('Could not launch $url');
     }
   }
 }

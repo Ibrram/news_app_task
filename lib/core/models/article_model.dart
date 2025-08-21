@@ -35,7 +35,7 @@ class ArticleData {
     return ArticleData(
       author: json['author'] ?? json['source']['name'],
       title: json['title'],
-      description: json['description'] ?? json['content'],
+      description: json['content'] ?? json['description'],
       url: json['url'],
       urlToImage: json['urlToImage'],
       publishedAt: json['publishedAt'],
