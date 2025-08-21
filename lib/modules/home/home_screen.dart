@@ -4,8 +4,8 @@ import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/drawer/advanced_drawer.dart';
 import 'package:news_app_task/drawer/advanced_drawer_controller.dart';
 import 'package:news_app_task/modules/home/widgets/drawer_widget.dart';
-import 'package:news_app_task/modules/home/widgets/home_list_categories_widget.dart';
-import 'package:news_app_task/modules/home/widgets/home_list_news_widget.dart';
+import 'package:news_app_task/modules/home/pages/home_list_categories_widget.dart';
+import 'package:news_app_task/modules/home/pages/home_list_news_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
