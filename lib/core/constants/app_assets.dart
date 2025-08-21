@@ -1,6 +1,7 @@
 class AppAssets {
   static const String micImg = "assets/images/light/mic_for_splash_screen.png";
   static const String routeLogoImg = "assets/images/light/route_branding.png";
+  static const String noImagePlaceholder = "assets/images/no_image.png";
   static const String generalBannerImg =
       "assets/images/categories_banner/light/general.png";
   static const String businessBannerImg =
