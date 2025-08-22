@@ -39,4 +39,18 @@ abstract class Requests {
     }
     return null;
   }
+
+  static Future<ArticleModel?> getQuertArticles(String query) async {
+    Map<String, dynamic> parms = {"apiKey": Contstants.apiKey, "q": query};
+    var data = await http.get(
+      Uri.https(Contstants.domain, EndPoints.everything, parms),
+    );
+
+    if (data.statusCode != 200) return null;
+    var decodedData = jsonDecode(data.body);
+    if (decodedData['status'] == NewsApiEnum.ok.name) {
+      return ArticleModel.fromJson(decodedData);
+    }
+    return null;
+  }
 }

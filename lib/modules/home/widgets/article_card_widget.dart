@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_task/core/constants/app_assets.dart';
 import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -15,6 +16,7 @@ class ArticleCardWidget extends StatelessWidget {
         showModalBottomSheet(
           context: context,
           backgroundColor: Colors.transparent,
+          isScrollControlled: true,
           builder: (context) {
             return Container(
               margin: const EdgeInsets.all(16),
@@ -30,7 +32,13 @@ class ArticleCardWidget extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadius.circular(16),
-                    child: Image.network(artcile.urlToImage, fit: BoxFit.cover),
+                    child: (artcile.urlToImage != "")
+                        ? Image.network(artcile.urlToImage, fit: BoxFit.cover)
+                        : Image.asset(
+                            AppAssets.noImagePlaceholder,
+                            fit: BoxFit.contain,
+                            height: 220,
+                          ),
                   ),
                   Text(
                     artcile.description,
@@ -71,7 +79,13 @@ class ArticleCardWidget extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(artcile.urlToImage, fit: BoxFit.cover),
+              child: (artcile.urlToImage != "")
+                  ? Image.network(artcile.urlToImage, fit: BoxFit.cover)
+                  : Image.asset(
+                      AppAssets.noImagePlaceholder,
+                      fit: BoxFit.contain,
+                      height: 220,
+                    ),
             ),
             Text(
               artcile.title,

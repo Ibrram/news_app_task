@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/constants/app_assets.dart';
+import 'package:news_app_task/core/routes/routes_name.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/drawer/advanced_drawer.dart';
 import 'package:news_app_task/drawer/advanced_drawer_controller.dart';
@@ -111,7 +112,16 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () => _advancedDrawerController.showDrawer(),
             icon: const Icon(Icons.menu_open_outlined),
           ),
-          actions: [const Icon(Icons.search, size: 25)],
+          actions: [
+            IconButton(
+              onPressed: () {
+                Navigator.pushNamed(context, RoutesName.search);
+              },
+              // constraints: const BoxConstraints(),
+              padding: EdgeInsets.zero,
+              icon: const Icon(Icons.search, size: 25),
+            ),
+          ],
         ),
         // drawer: const Drawer(),
         body: Padding(

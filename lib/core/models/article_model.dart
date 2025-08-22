@@ -34,10 +34,10 @@ class ArticleData {
   factory ArticleData.fromJson(Map<String, dynamic> json) {
     return ArticleData(
       author: json['author'] ?? json['source']['name'],
-      title: json['title'],
+      title: json['title'] ?? "",
       description: json['content'] ?? json['description'],
-      url: json['url'],
-      urlToImage: json['urlToImage'],
+      url: json['url'] ?? "",
+      urlToImage: json['urlToImage'] ?? "",
       publishedAt: json['publishedAt'],
     );
   }
