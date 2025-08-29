@@ -81,7 +81,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
           const SizedBox(height: 16),
           if (selectedSource != null)
             FutureBuilder(
-              future: Requests.getArticles(selectedSource!),
+              future: Requests.getArticles(source: selectedSource!),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());

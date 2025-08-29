@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:news_app_task/api/contstants.dart';
 import 'package:news_app_task/api/end_points.dart';
@@ -23,25 +24,21 @@ abstract class Requests {
     return null;
   }
 
-  static Future<ArticleModel?> getArticles(String source) async {
+  static Future<ArticleModel?> getArticles({
+    String? source,
+    String? query,
+    String page = "1",
+  }) async {
     Map<String, dynamic> parms = {
       "apiKey": Contstants.apiKey,
-      "sources": source,
+      "pageSize": "10",
+      "page": page,
     };
-    var data = await http.get(
-      Uri.https(Contstants.domain, EndPoints.articles, parms),
-    );
-
-    if (data.statusCode != 200) return null;
-    var decodedData = jsonDecode(data.body);
-    if (decodedData['status'] == NewsApiEnum.ok.name) {
-      return ArticleModel.fromJson(decodedData);
+    if (source != null && source.isNotEmpty) {
+      parms['sources'] = source;
+    } else if (query != null && query.isNotEmpty) {
+      parms['q'] = query;
     }
-    return null;
-  }
-
-  static Future<ArticleModel?> getQuertArticles(String query) async {
-    Map<String, dynamic> parms = {"apiKey": Contstants.apiKey, "q": query};
     var data = await http.get(
       Uri.https(Contstants.domain, EndPoints.everything, parms),
     );
@@ -49,8 +46,23 @@ abstract class Requests {
     if (data.statusCode != 200) return null;
     var decodedData = jsonDecode(data.body);
     if (decodedData['status'] == NewsApiEnum.ok.name) {
+      log(data.request!.url.toString());
       return ArticleModel.fromJson(decodedData);
     }
     return null;
   }
+
+  // static Future<ArticleModel?> getQuertArticles(String query) async {
+  //   Map<String, dynamic> parms = {"apiKey": Contstants.apiKey, "q": query};
+  //   var data = await http.get(
+  //     Uri.https(Contstants.domain, EndPoints.everything, parms),
+  //   );
+
+  //   if (data.statusCode != 200) return null;
+  //   var decodedData = jsonDecode(data.body);
+  //   if (decodedData['status'] == NewsApiEnum.ok.name) {
+  //     return ArticleModel.fromJson(decodedData);
+  //   }
+  //   return null;
+  // }
 }
