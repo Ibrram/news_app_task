@@ -62,7 +62,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 const Center(child: CircularProgressIndicator())
               else if (artciles.isEmpty)
                 const Center(child: Text('No Articles with your search'))
-              else ...[
+              else
                 Expanded(
                   child: ListView.separated(
                     shrinkWrap: true,
@@ -110,7 +110,6 @@ class _SearchScreenState extends State<SearchScreen> {
                     itemCount: artciles.length + 1,
                   ),
                 ),
-              ],
             ],
           ),
         ),
