@@ -61,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
               else if (isLoading)
                 const Center(child: CircularProgressIndicator())
               else if (artciles.isEmpty)
-                const Center(child: Text('No Artciles with your search'))
+                const Center(child: Text('No Articles with your search'))
               else ...[
                 Expanded(
                   child: ListView.separated(
@@ -111,38 +111,6 @@ class _SearchScreenState extends State<SearchScreen> {
                   ),
                 ),
               ],
-              // if (query == null || query!.length < 5)
-              //   const Center(child: Text('at least 5 chars to search'))
-              // else
-              //   FutureBuilder(
-              //     future: Requests.getArticles(query: query!),
-              //     builder: (context, snapshot) {
-              //       if (snapshot.connectionState == ConnectionState.waiting) {
-              //         return const Center(child: CircularProgressIndicator());
-              //       }
-              //       if (snapshot.hasError) {
-              //         return Center(
-              //           child: Text("There's error: ${snapshot.error}"),
-              //         );
-              //       }
-              //       if (!snapshot.hasData) {
-              //         return const Center(
-              //           child: Text('No Artciles with your search'),
-              //         );
-              //       }
-              //       return ListView.separated(
-              //         shrinkWrap: true,
-              //         physics: const NeverScrollableScrollPhysics(),
-              //         itemBuilder: (context, index) {
-              //           ArticleData artcile = snapshot.data!.articles[index];
-              //           return ArticleCardWidget(artcile: artcile);
-              //         },
-              //         separatorBuilder: (context, index) =>
-              //             const SizedBox(height: 16),
-              //         itemCount: snapshot.data!.articles.length,
-              //       );
-              //     },
-              //   ),
             ],
           ),
         ),
