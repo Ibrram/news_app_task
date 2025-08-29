@@ -64,7 +64,7 @@ class _SearchScreenState extends State<SearchScreen> {
                       }
                       if (!snapshot.hasData) {
                         return const Center(
-                          child: Text('No Artciles with your search'),
+                          child: Text('No Articles with your search'),
                         );
                       }
 
