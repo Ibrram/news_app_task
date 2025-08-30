@@ -7,6 +7,7 @@ import 'package:news_app_task/modules/home/widgets/article_card_widget.dart';
 
 class HomeListNewsWidget extends StatefulWidget {
   final String categoryToApi;
+
   const HomeListNewsWidget({super.key, required this.categoryToApi});
 
   @override
@@ -17,6 +18,13 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
   String? selectedSource;
   late Future<SourceModel?> sourcesFuture;
 
+  // for articles pagination
+  bool isLoading = true;
+  bool isLoadMoreButtonClicked = false;
+  int currentPage = 1;
+  String? errorMessage;
+  List<ArticleData> articles = [];
+
   @override
   void initState() {
     super.initState();
@@ -25,6 +33,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
         setState(() {
           selectedSource = value.sources.first.id;
         });
+        getArticles();
       }
       return value;
     });
@@ -70,6 +79,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
                     setState(() {
                       selectedSource = source.sources[value].id;
                     });
+                    getArticles();
                   },
                   tabs: source.sources.map((e) {
                     return Tab(child: Text(e.name));
@@ -79,41 +89,86 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
             },
           ),
           const SizedBox(height: 16),
-          if (selectedSource != null)
-            FutureBuilder(
-              future: Requests.getArticles(source: selectedSource!),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                if (snapshot.hasError) {
-                  return Center(
-                    child: Text(
-                      'unexpected error to get artciles ${snapshot.error}',
+          if (isLoading && selectedSource != null)
+            const Center(child: CircularProgressIndicator())
+          else if (errorMessage != null && errorMessage!.isNotEmpty)
+            Center(child: Text(errorMessage!))
+          else if (articles.isNotEmpty)
+            ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: articles.length + 1,
+              itemBuilder: (context, index) {
+                if (index == articles.length) {
+                  return ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        isLoadMoreButtonClicked = true;
+                      });
+                      currentPage++;
+                      getArticles();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: ContinuousRectangleBorder(
+                        side: const BorderSide(
+                          color: ColorsPalette.primaryBlackColor,
+                        ),
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: isLoadMoreButtonClicked
+                            ? const SizedBox(
+                                width: 20,
+                                height: 20,
+                                child: CircularProgressIndicator(),
+                              )
+                            : const Text('Load More'),
+                      ),
                     ),
                   );
                 }
-                if (!snapshot.hasData) {
-                  return Center(child: Text('No Artciles ${snapshot.error}'));
-                }
-
-                final List<ArticleData> artciles = snapshot.data!.articles;
-
-                return ListView.separated(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: artciles.length,
-                  itemBuilder: (context, index) {
-                    var artcile = artciles[index];
-                    return ArticleCardWidget(artcile: artcile);
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 16),
-                );
+                var article = articles[index];
+                return ArticleCardWidget(artcile: article);
               },
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
             ),
         ],
       ),
     );
+  }
+
+  Future<void> getArticles() async {
+    if (!isLoadMoreButtonClicked) {
+      articles.clear();
+      setState(() {
+        isLoading = true;
+      });
+    }
+    try {
+      var fetch = await Requests.getArticles(
+        source: selectedSource,
+        page: currentPage.toString(),
+      );
+      if (fetch != null && fetch.articles.isNotEmpty) {
+        articles.addAll(fetch.articles);
+        errorMessage = null;
+      } else {
+        errorMessage = "Cannot get News Related to this source";
+      }
+    } catch (e) {
+      errorMessage = e.toString();
+    }
+    setState(() {
+      if (isLoadMoreButtonClicked) {
+        isLoadMoreButtonClicked = false;
+      } else {
+        isLoading = false;
+      }
+    });
   }
 }
