@@ -23,9 +23,10 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppProvider provider = Provider.of<AppProvider>(context);
     return MaterialApp(
+      key: ValueKey(provider.locale.languageCode),
       theme: provider.theme == ThemeMode.light
-          ? AppThemeManager.light
-          : AppThemeManager.dark,
+          ? AppThemeManager.light(provider.locale.languageCode)
+          : AppThemeManager.dark(provider.locale.languageCode),
       themeMode: provider.theme,
       initialRoute: RoutesName.splash,
       onGenerateRoute: AppRoutes.onGenerateRoutes,

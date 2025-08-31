@@ -32,3 +32,16 @@ flutter:
     - assets/images/categories_banner/dark/
     - assets/icons/
     - assets/fonts/
+  fonts:
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Medium.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-SemiBold.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Bold.ttf
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/Cairo/Cairo-Regular.ttf
+        - asset: assets/fonts/Cairo/Cairo-Medium.ttf
+        - asset: assets/fonts/Cairo/Cairo-SemiBold.ttf
+        - asset: assets/fonts/Cairo/Cairo-Bold.ttf
