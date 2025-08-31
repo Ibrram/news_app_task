@@ -1,0 +1,1 @@
+enum NewsApiEnum { ok, error }
