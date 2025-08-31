@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_task/core/providers/app_provider.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
+import 'package:provider/provider.dart';
 
 import '../../../l10n/app_localizations.dart';
 import '../../../widgets/drop_down_menu_widget.dart';
 
-class DrawerWidget extends StatelessWidget {
+class DrawerWidget extends StatefulWidget {
   final Function()? goToHomeTap;
   const DrawerWidget({super.key, required this.goToHomeTap});
 
   @override
+  State<DrawerWidget> createState() => _DrawerWidgetState();
+}
+
+class _DrawerWidgetState extends State<DrawerWidget> {
+  @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     AppLocalizations lang = AppLocalizations.of(context)!;
+    AppProvider provider = Provider.of<AppProvider>(context, listen: false);
+    // String selectedLang = provider.locale.languageCode;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -46,7 +55,7 @@ class DrawerWidget extends StatelessWidget {
                 size: 24,
                 color: ColorsPalette.scaffoldBackground,
               ),
-              onTap: goToHomeTap,
+              onTap: widget.goToHomeTap,
             ),
             const Divider(),
             Padding(
@@ -124,8 +133,11 @@ class DrawerWidget extends StatelessWidget {
                         child: Text('العربية'),
                       ),
                     ],
-                    onChanged: (value) {},
-                    selected: 'ar',
+                    onChanged: (value) {
+                      if (value == null) return;
+                      provider.changeLang(value);
+                    },
+                    selected: provider.locale.languageCode,
                   ),
                 ],
               ),
