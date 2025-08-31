@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 
 import '../../../l10n/app_localizations.dart';
+import '../../../widgets/drop_down_menu_widget.dart';
 
 class DrawerWidget extends StatelessWidget {
   final Function()? goToHomeTap;
@@ -46,6 +47,88 @@ class DrawerWidget extends StatelessWidget {
                 color: ColorsPalette.scaffoldBackground,
               ),
               onTap: goToHomeTap,
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        Icons.imagesearch_roller_outlined,
+                        size: 24,
+                        color: ColorsPalette.scaffoldBackground,
+                      ),
+                      Text(
+                        lang.drawer_change_theme,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: ColorsPalette.scaffoldBackground,
+                        ),
+                      ),
+                    ],
+                  ),
+                  DropDownMenuWidget(
+                    items: [
+                      DropdownMenuItem(
+                        value: 'light',
+                        child: Text(lang.theme_mode_light),
+                      ),
+                      DropdownMenuItem(
+                        value: 'dark',
+                        child: Text(lang.theme_mode_dark),
+                      ),
+                    ],
+                    onChanged: (value) {},
+                    selected: 'light',
+                  ),
+                ],
+              ),
+            ),
+            const Divider(),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                spacing: 16,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    spacing: 8,
+                    children: [
+                      Icon(
+                        Icons.language_outlined,
+                        size: 24,
+                        color: ColorsPalette.scaffoldBackground,
+                      ),
+                      Text(
+                        lang.drawer_change_lang,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: ColorsPalette.scaffoldBackground,
+                        ),
+                      ),
+                    ],
+                  ),
+                  DropDownMenuWidget(
+                    items: [
+                      const DropdownMenuItem(
+                        value: 'en',
+                        child: Text('English'),
+                      ),
+                      const DropdownMenuItem(
+                        value: 'ar',
+                        child: Text('العربية'),
+                      ),
+                    ],
+                    onChanged: (value) {},
+                    selected: 'ar',
+                  ),
+                ],
+              ),
             ),
           ],
         ),
