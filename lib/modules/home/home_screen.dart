@@ -4,9 +4,10 @@ import 'package:news_app_task/core/routes/routes_name.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/drawer/advanced_drawer.dart';
 import 'package:news_app_task/drawer/advanced_drawer_controller.dart';
-import 'package:news_app_task/modules/home/widgets/drawer_widget.dart';
+import 'package:news_app_task/l10n/app_localizations.dart';
 import 'package:news_app_task/modules/home/pages/home_list_categories_widget.dart';
 import 'package:news_app_task/modules/home/pages/home_list_news_widget.dart';
+import 'package:news_app_task/modules/home/widgets/drawer_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,6 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
   final _advancedDrawerController = AdvancedDrawerController();
   @override
   Widget build(BuildContext context) {
+    AppLocalizations lang = AppLocalizations.of(context)!;
+    String currentLocale = Localizations.localeOf(context).languageCode;
     var theme = Theme.of(context);
     return AdvancedDrawer(
       backdrop: Container(
@@ -79,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       animationCurve: Curves.easeIn,
       animationDuration: const Duration(milliseconds: 300),
       animateChildDecoration: true,
-      rtlOpening: false,
+      rtlOpening: currentLocale == "ar" ? true : false,
       disabledGestures: false,
       childDecoration: const BoxDecoration(
         // NOTICE: Uncomment if you want to add shadow behind the page.
@@ -105,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            selectedCategory ?? 'Home',
+            selectedCategory ?? lang.home,
             style: theme.textTheme.bodyMedium,
           ),
           leading: IconButton(

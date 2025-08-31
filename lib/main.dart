@@ -3,6 +3,8 @@ import 'package:news_app_task/core/routes/app_routes.dart';
 import 'package:news_app_task/core/routes/routes_name.dart';
 import 'package:news_app_task/core/theme_manager/app_theme_manager.dart';
 
+import 'l10n/app_localizations.dart';
+
 void main() {
   runApp(const MainApp());
 }
@@ -17,6 +19,9 @@ class MainApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       initialRoute: RoutesName.splash,
       onGenerateRoute: AppRoutes.onGenerateRoutes,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
+      locale: const Locale('ar'),
     );
   }
 }

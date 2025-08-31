@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
+import 'package:news_app_task/l10n/app_localizations.dart';
 
 class CategoryCardWidget extends StatelessWidget {
   final Map<String, dynamic> category;
@@ -15,6 +16,7 @@ class CategoryCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return ClipRRect(
       borderRadius: BorderRadius.circular(24),
       child: Container(
@@ -48,7 +50,10 @@ class CategoryCardWidget extends StatelessWidget {
                       vertical: 9,
                       horizontal: 16,
                     ),
-                    child: Text('View All', style: theme.textTheme.bodyLarge),
+                    child: Text(
+                      lang.view_all,
+                      style: theme.textTheme.bodyLarge,
+                    ),
                   ),
                   AspectRatio(
                     aspectRatio: 1,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:news_app_task/l10n/app_localizations.dart';
 import 'package:news_app_task/modules/home/widgets/category_card_widget.dart';
 
 class HomeListCategoriesWidget extends StatelessWidget {
@@ -13,14 +14,12 @@ class HomeListCategoriesWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return Column(
       spacing: 16,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Text(
-          'Good Morning\nHere is Some News For You',
-          style: theme.textTheme.bodyLarge,
-        ),
+        Text(lang.welcoming_home, style: theme.textTheme.bodyLarge),
         ListView.separated(
           physics: const NeverScrollableScrollPhysics(),
           shrinkWrap: true,
