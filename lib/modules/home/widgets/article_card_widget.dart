@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/constants/app_assets.dart';
 import 'package:news_app_task/core/models/article_model.dart';
+import 'package:news_app_task/core/providers/app_provider.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../l10n/app_localizations.dart';
@@ -14,6 +16,7 @@ class ArticleCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     AppLocalizations lang = AppLocalizations.of(context)!;
+    AppProvider provider = Provider.of<AppProvider>(context);
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -60,7 +63,9 @@ class ArticleCardWidget extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       child: Text(
                         lang.view_article_button,
-                        style: theme.textTheme.bodySmall,
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: ColorsPalette.primaryBlackColor,
+                        ),
                       ),
                     ),
                   ),
@@ -73,7 +78,11 @@ class ArticleCardWidget extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(8),
         decoration: BoxDecoration(
-          border: Border.all(color: ColorsPalette.primaryBlackColor),
+          border: Border.all(
+            color: (provider.theme == ThemeMode.light
+                ? ColorsPalette.primaryBlackColor
+                : ColorsPalette.scaffoldBackground),
+          ),
           borderRadius: BorderRadius.circular(16),
         ),
         child: Column(

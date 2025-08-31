@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:news_app_task/api/requests.dart';
 import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/models/source_model.dart';
+import 'package:news_app_task/core/providers/app_provider.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/l10n/app_localizations.dart';
 import 'package:news_app_task/modules/home/widgets/article_card_widget.dart';
+import 'package:provider/provider.dart';
 
 class HomeListNewsWidget extends StatefulWidget {
   final String categoryToApi;
@@ -44,6 +46,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     AppLocalizations lang = AppLocalizations.of(context)!;
+    AppProvider provider = Provider.of<AppProvider>(context);
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -112,8 +115,10 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
                       shape: ContinuousRectangleBorder(
-                        side: const BorderSide(
-                          color: ColorsPalette.primaryBlackColor,
+                        side: BorderSide(
+                          color: (provider.theme == ThemeMode.light)
+                              ? ColorsPalette.primaryBlackColor
+                              : ColorsPalette.scaffoldBackground,
                         ),
                         borderRadius: BorderRadius.circular(16),
                       ),
@@ -127,7 +132,10 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
                                 height: 20,
                                 child: CircularProgressIndicator(),
                               )
-                            : Text(lang.load_more_button),
+                            : Text(
+                                lang.load_more_button,
+                                style: theme.textTheme.bodySmall,
+                              ),
                       ),
                     ),
                   );

@@ -42,4 +42,42 @@ class AppThemeManager {
       ),
     ),
   );
+  static ThemeData dark = ThemeData(
+    scaffoldBackgroundColor: ColorsPalette.primaryBlackColor,
+    appBarTheme: AppBarTheme(
+      centerTitle: true,
+      scrolledUnderElevation: 0,
+      backgroundColor: ColorsPalette.primaryBlackColor,
+      foregroundColor: ColorsPalette.scaffoldBackground,
+      actionsPadding: const EdgeInsets.all(16),
+      actionsIconTheme: IconThemeData(color: ColorsPalette.scaffoldBackground),
+    ),
+    textTheme: TextTheme(
+      bodyLarge: TextStyle(
+        fontSize: 24,
+        fontWeight: FontWeight.w500,
+        color: ColorsPalette.scaffoldBackground,
+      ),
+      bodyMedium: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: ColorsPalette.scaffoldBackground,
+      ),
+      bodySmall: TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.bold,
+        color: ColorsPalette.scaffoldBackground,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        color: ColorsPalette.scaffoldBackground,
+      ),
+      displaySmall: TextStyle(
+        fontSize: 12,
+        fontWeight: FontWeight.w500,
+        color: ColorsPalette.scaffoldBackground,
+      ),
+    ),
+  );
 }

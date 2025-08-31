@@ -23,7 +23,9 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     AppProvider provider = Provider.of<AppProvider>(context);
     return MaterialApp(
-      theme: AppThemeManager.light,
+      theme: provider.theme == ThemeMode.light
+          ? AppThemeManager.light
+          : AppThemeManager.dark,
       themeMode: provider.theme,
       initialRoute: RoutesName.splash,
       onGenerateRoute: AppRoutes.onGenerateRoutes,

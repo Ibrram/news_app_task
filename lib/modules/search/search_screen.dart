@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/api/requests.dart';
 import 'package:news_app_task/core/models/article_model.dart';
+import 'package:news_app_task/core/providers/app_provider.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/modules/home/widgets/article_card_widget.dart';
+import 'package:provider/provider.dart';
 
 import '../../l10n/app_localizations.dart';
 
@@ -24,6 +26,7 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     AppLocalizations lang = AppLocalizations.of(context)!;
+    AppProvider provider = Provider.of<AppProvider>(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -43,21 +46,37 @@ class _SearchScreenState extends State<SearchScreen> {
                     getArtciles();
                   }
                 },
+                onTapOutside: (_) {
+                  FocusScope.of(context).unfocus();
+                },
                 decoration: InputDecoration(
-                  prefixIcon: const Icon(
+                  prefixIcon: Icon(
                     Icons.search_rounded,
                     size: 24,
-                    color: ColorsPalette.primaryBlackColor,
+                    color: (provider.theme == ThemeMode.light)
+                        ? ColorsPalette.primaryBlackColor
+                        : ColorsPalette.scaffoldBackground,
                   ),
                   contentPadding: const EdgeInsets.all(16),
+                  hintStyle: theme.textTheme.bodyMedium?.copyWith(
+                    color: (provider.theme == ThemeMode.light)
+                        ? ColorsPalette.primaryBlackColor
+                        : ColorsPalette.scaffoldBackground,
+                  ),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(16),
-                    borderSide: const BorderSide(
-                      color: ColorsPalette.primaryBlackColor,
+                    borderSide: BorderSide(
+                      color: (provider.theme == ThemeMode.light)
+                          ? ColorsPalette.primaryBlackColor
+                          : ColorsPalette.scaffoldBackground,
                     ),
                   ),
                 ),
-                style: theme.textTheme.bodyMedium,
+                style: theme.textTheme.bodyMedium?.copyWith(
+                  color: (provider.theme == ThemeMode.light)
+                      ? ColorsPalette.primaryBlackColor
+                      : ColorsPalette.scaffoldBackground,
+                ),
               ),
               if (query == null || query!.length < 5)
                 Center(child: Text(lang.search_query_condition))
@@ -85,8 +104,10 @@ class _SearchScreenState extends State<SearchScreen> {
                             backgroundColor: Colors.transparent,
                             shadowColor: Colors.transparent,
                             shape: ContinuousRectangleBorder(
-                              side: const BorderSide(
-                                color: ColorsPalette.primaryBlackColor,
+                              side: BorderSide(
+                                color: (provider.theme == ThemeMode.light)
+                                    ? ColorsPalette.primaryBlackColor
+                                    : ColorsPalette.scaffoldBackground,
                               ),
                               borderRadius: BorderRadius.circular(16),
                             ),
@@ -100,7 +121,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                       height: 20,
                                       child: CircularProgressIndicator(),
                                     )
-                                  : Text(lang.load_more_button),
+                                  : Text(
+                                      lang.load_more_button,
+                                      style: theme.textTheme.bodySmall,
+                                    ),
                             ),
                           ),
                         );

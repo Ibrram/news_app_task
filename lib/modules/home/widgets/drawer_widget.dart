@@ -20,7 +20,6 @@ class _DrawerWidgetState extends State<DrawerWidget> {
     var theme = Theme.of(context);
     AppLocalizations lang = AppLocalizations.of(context)!;
     AppProvider provider = Provider.of<AppProvider>(context, listen: false);
-    // String selectedLang = provider.locale.languageCode;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -38,6 +37,7 @@ class _DrawerWidgetState extends State<DrawerWidget> {
               child: Text(
                 lang.drawer_app_name,
                 style: theme.textTheme.bodyLarge?.copyWith(
+                  color: ColorsPalette.primaryBlackColor,
                   fontWeight: FontWeight.w700,
                 ),
               ),
@@ -92,8 +92,15 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                         child: Text(lang.theme_mode_dark),
                       ),
                     ],
-                    onChanged: (value) {},
-                    selected: 'light',
+                    onChanged: (value) {
+                      if (value == null) return;
+                      provider.changeTheme(
+                        value == 'light' ? ThemeMode.light : ThemeMode.dark,
+                      );
+                    },
+                    selected: provider.theme == ThemeMode.light
+                        ? 'light'
+                        : 'dark',
                   ),
                 ],
               ),

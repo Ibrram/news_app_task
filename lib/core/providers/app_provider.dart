@@ -5,7 +5,7 @@ class AppProvider extends ChangeNotifier {
   Locale _locale = const Locale('en');
   Locale get locale => _locale;
   // theme
-  ThemeMode _theme = ThemeMode.light;
+  ThemeMode _theme = ThemeMode.dark;
   ThemeMode get theme => _theme;
 
   void changeTheme(ThemeMode theme) {
