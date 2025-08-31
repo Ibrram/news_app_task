@@ -4,6 +4,8 @@ import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:news_app_task/modules/home/widgets/article_card_widget.dart';
 
+import '../../l10n/app_localizations.dart';
+
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
 
@@ -21,6 +23,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -57,11 +60,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 style: theme.textTheme.bodyMedium,
               ),
               if (query == null || query!.length < 5)
-                const Center(child: Text('at least 5 chars to search'))
+                Center(child: Text(lang.search_query_condition))
               else if (isLoading)
                 const Center(child: CircularProgressIndicator())
               else if (artciles.isEmpty)
-                const Center(child: Text('No Articles with your search'))
+                Center(child: Text(lang.search_query_no_article))
               else
                 Expanded(
                   child: ListView.separated(
@@ -97,7 +100,7 @@ class _SearchScreenState extends State<SearchScreen> {
                                       height: 20,
                                       child: CircularProgressIndicator(),
                                     )
-                                  : const Text('Load More'),
+                                  : Text(lang.load_more_button),
                             ),
                           ),
                         );

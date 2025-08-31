@@ -3,6 +3,7 @@ import 'package:news_app_task/api/requests.dart';
 import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/models/source_model.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
+import 'package:news_app_task/l10n/app_localizations.dart';
 import 'package:news_app_task/modules/home/widgets/article_card_widget.dart';
 
 class HomeListNewsWidget extends StatefulWidget {
@@ -42,6 +43,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -52,12 +54,10 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
                 return const Center(child: CircularProgressIndicator());
               }
               if (snapshot.hasError) {
-                return const Center(
-                  child: Text('unexpected error to get sources'),
-                );
+                return Center(child: Text(lang.news_sources_unexpected_error));
               }
               if (!snapshot.hasData) {
-                return const Center(child: Text('No Sources'));
+                return Center(child: Text(lang.news_no_sources));
               }
 
               final SourceModel source = snapshot.data!;
@@ -127,7 +127,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
                                 height: 20,
                                 child: CircularProgressIndicator(),
                               )
-                            : const Text('Load More'),
+                            : Text(lang.load_more_button),
                       ),
                     ),
                   );
@@ -143,6 +143,8 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
   }
 
   Future<void> getArticles() async {
+    final lang = AppLocalizations.of(context)!;
+
     if (!isLoadMoreButtonClicked) {
       articles.clear();
       setState(() {
@@ -158,7 +160,7 @@ class _HomeListNewsWidgetState extends State<HomeListNewsWidget> {
         articles.addAll(fetch.articles);
         errorMessage = null;
       } else {
-        errorMessage = "Cannot get News Related to this source";
+        errorMessage = lang.news_no_articles_in_source;
       }
     } catch (e) {
       errorMessage = e.toString();

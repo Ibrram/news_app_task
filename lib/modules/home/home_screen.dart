@@ -19,49 +19,49 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   String? selectedCategory;
   String? categoryToApi;
-  List<Map<String, dynamic>> categories = [
-    {
-      "name": "General",
-      "category": "general",
-      "banner": AppAssets.generalBannerImg,
-    },
-    {
-      "name": "Business",
-      "category": "business",
-      "banner": AppAssets.businessBannerImg,
-    },
-    {
-      "name": "Sports",
-      "category": "sports",
-      "banner": AppAssets.sportsBannerImg,
-    },
-    {
-      "name": "Technology",
-      "category": "technology",
-      "banner": AppAssets.technologyBannerImg,
-    },
-    {
-      "name": "Science",
-      "category": "science",
-      "banner": AppAssets.scienceBannerImg,
-    },
-    {
-      "name": "Health",
-      "category": "health",
-      "banner": AppAssets.healthBannerImg,
-    },
-    {
-      "name": "Entertainment",
-      "category": "entertainment",
-      "banner": AppAssets.entertainmentBannerImg,
-    },
-  ];
   final _advancedDrawerController = AdvancedDrawerController();
   @override
   Widget build(BuildContext context) {
     AppLocalizations lang = AppLocalizations.of(context)!;
     String currentLocale = Localizations.localeOf(context).languageCode;
     var theme = Theme.of(context);
+    List<Map<String, dynamic>> categories = [
+      {
+        "name": lang.category_name_general,
+        "category": "general",
+        "banner": AppAssets.generalBannerImg,
+      },
+      {
+        "name": lang.category_name_business,
+        "category": "business",
+        "banner": AppAssets.businessBannerImg,
+      },
+      {
+        "name": lang.category_name_sports,
+        "category": "sports",
+        "banner": AppAssets.sportsBannerImg,
+      },
+      {
+        "name": lang.category_name_technology,
+        "category": "technology",
+        "banner": AppAssets.technologyBannerImg,
+      },
+      {
+        "name": lang.category_name_science,
+        "category": "science",
+        "banner": AppAssets.scienceBannerImg,
+      },
+      {
+        "name": lang.category_name_health,
+        "category": "health",
+        "banner": AppAssets.healthBannerImg,
+      },
+      {
+        "name": lang.category_name_entertainment,
+        "category": "entertainment",
+        "banner": AppAssets.entertainmentBannerImg,
+      },
+    ];
     return AdvancedDrawer(
       backdrop: Container(
         width: double.infinity,

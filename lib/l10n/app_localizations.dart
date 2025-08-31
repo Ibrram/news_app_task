@@ -115,6 +115,174 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'View All'**
   String get view_all;
+
+  /// No description provided for @drawer_app_name.
+  ///
+  /// In en, this message translates to:
+  /// **'News App'**
+  String get drawer_app_name;
+
+  /// No description provided for @drawer_home_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Go To Home'**
+  String get drawer_home_button;
+
+  /// No description provided for @drawer_change_theme.
+  ///
+  /// In en, this message translates to:
+  /// **'Theme'**
+  String get drawer_change_theme;
+
+  /// No description provided for @drawer_change_lang.
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get drawer_change_lang;
+
+  /// No description provided for @theme_mode_light.
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get theme_mode_light;
+
+  /// No description provided for @theme_mode_dark.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get theme_mode_dark;
+
+  /// No description provided for @news_sources_unexpected_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Unexpected Error to get Sources'**
+  String get news_sources_unexpected_error;
+
+  /// No description provided for @news_no_sources.
+  ///
+  /// In en, this message translates to:
+  /// **'No Sources'**
+  String get news_no_sources;
+
+  /// No description provided for @news_no_articles_in_source.
+  ///
+  /// In en, this message translates to:
+  /// **'Cannot get News Related to this Source'**
+  String get news_no_articles_in_source;
+
+  /// No description provided for @article_author.
+  ///
+  /// In en, this message translates to:
+  /// **'by'**
+  String get article_author;
+
+  /// No description provided for @publish_time_seconds.
+  ///
+  /// In en, this message translates to:
+  /// **'seconds ago'**
+  String get publish_time_seconds;
+
+  /// No description provided for @publish_time_minutes.
+  ///
+  /// In en, this message translates to:
+  /// **'minutes ago'**
+  String get publish_time_minutes;
+
+  /// No description provided for @publish_time_hours.
+  ///
+  /// In en, this message translates to:
+  /// **'hours ago'**
+  String get publish_time_hours;
+
+  /// No description provided for @publish_time_days.
+  ///
+  /// In en, this message translates to:
+  /// **'days ago'**
+  String get publish_time_days;
+
+  /// No description provided for @publish_time_months.
+  ///
+  /// In en, this message translates to:
+  /// **'months ago'**
+  String get publish_time_months;
+
+  /// No description provided for @publish_time_years.
+  ///
+  /// In en, this message translates to:
+  /// **'years ago'**
+  String get publish_time_years;
+
+  /// No description provided for @load_more_button.
+  ///
+  /// In en, this message translates to:
+  /// **'Load More'**
+  String get load_more_button;
+
+  /// No description provided for @view_article_button.
+  ///
+  /// In en, this message translates to:
+  /// **'View Full Article'**
+  String get view_article_button;
+
+  /// No description provided for @search.
+  ///
+  /// In en, this message translates to:
+  /// **'Search'**
+  String get search;
+
+  /// No description provided for @search_query_condition.
+  ///
+  /// In en, this message translates to:
+  /// **'at Least 5 Characters to Search'**
+  String get search_query_condition;
+
+  /// No description provided for @search_query_no_article.
+  ///
+  /// In en, this message translates to:
+  /// **'No Articles with your search'**
+  String get search_query_no_article;
+
+  /// No description provided for @category_name_general.
+  ///
+  /// In en, this message translates to:
+  /// **'General'**
+  String get category_name_general;
+
+  /// No description provided for @category_name_business.
+  ///
+  /// In en, this message translates to:
+  /// **'Business'**
+  String get category_name_business;
+
+  /// No description provided for @category_name_sports.
+  ///
+  /// In en, this message translates to:
+  /// **'Sports'**
+  String get category_name_sports;
+
+  /// No description provided for @category_name_technology.
+  ///
+  /// In en, this message translates to:
+  /// **'Technology'**
+  String get category_name_technology;
+
+  /// No description provided for @category_name_science.
+  ///
+  /// In en, this message translates to:
+  /// **'Science'**
+  String get category_name_science;
+
+  /// No description provided for @category_name_health.
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
+  String get category_name_health;
+
+  /// No description provided for @category_name_entertainment.
+  ///
+  /// In en, this message translates to:
+  /// **'Entertainment'**
+  String get category_name_entertainment;
 }
 
 class _AppLocalizationsDelegate

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class DrawerWidget extends StatelessWidget {
   final Function()? goToHomeTap;
   const DrawerWidget({super.key, required this.goToHomeTap});
@@ -8,6 +10,7 @@ class DrawerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -23,7 +26,7 @@ class DrawerWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
               ),
               child: Text(
-                'News App',
+                lang.drawer_app_name,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w700,
                 ),
@@ -32,7 +35,7 @@ class DrawerWidget extends StatelessWidget {
 
             ListTile(
               title: Text(
-                'Go To Home',
+                lang.drawer_home_button,
                 style: theme.textTheme.bodyMedium?.copyWith(
                   color: ColorsPalette.scaffoldBackground,
                 ),

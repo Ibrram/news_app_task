@@ -4,6 +4,8 @@ import 'package:news_app_task/core/models/article_model.dart';
 import 'package:news_app_task/core/theme_manager/colors_palette.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../l10n/app_localizations.dart';
+
 class ArticleCardWidget extends StatelessWidget {
   final ArticleData artcile;
   const ArticleCardWidget({super.key, required this.artcile});
@@ -11,6 +13,7 @@ class ArticleCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
+    AppLocalizations lang = AppLocalizations.of(context)!;
     return InkWell(
       onTap: () {
         showModalBottomSheet(
@@ -56,7 +59,7 @@ class ArticleCardWidget extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Text(
-                        'View Full Article',
+                        lang.view_article_button,
                         style: theme.textTheme.bodySmall,
                       ),
                     ),
@@ -97,11 +100,11 @@ class ArticleCardWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'By: ${shortAuthorName(artcile.author)}',
+                  '${lang.article_author}: ${shortAuthorName(artcile.author)}',
                   style: theme.textTheme.displaySmall,
                 ),
                 Text(
-                  publishTimeConvert(artcile.publishedAt),
+                  publishTimeConvert(artcile.publishedAt, lang),
                   style: theme.textTheme.displaySmall,
                 ),
               ],
@@ -123,23 +126,23 @@ class ArticleCardWidget extends StatelessWidget {
     return "";
   }
 
-  String publishTimeConvert(String dateIso) {
+  String publishTimeConvert(String dateIso, AppLocalizations lang) {
     final date = DateTime.parse(dateIso);
     final now = DateTime.now().toUtc();
     final difference = now.difference(date);
 
     if (difference.inSeconds < 60) {
-      return '${difference.inSeconds} seconds ago';
+      return '${difference.inSeconds} ${lang.publish_time_seconds}';
     } else if (difference.inMinutes < 60) {
-      return '${difference.inMinutes} minutes ago';
+      return '${difference.inMinutes} ${lang.publish_time_minutes}';
     } else if (difference.inHours < 24) {
-      return '${difference.inHours} hours ago';
+      return '${difference.inHours} ${lang.publish_time_hours}';
     } else if (difference.inDays < 30) {
-      return '${difference.inDays} days ago';
+      return '${difference.inDays} ${lang.publish_time_days}';
     } else if (difference.inDays < 365) {
-      return '${(difference.inDays / 30).floor()} months ago';
+      return '${(difference.inDays / 30).floor()} ${lang.publish_time_months}';
     } else {
-      return '${(difference.inDays / 365).floor()} years ago';
+      return '${(difference.inDays / 365).floor()} ${lang.publish_time_years}';
     }
   }
 
